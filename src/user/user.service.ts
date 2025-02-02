@@ -24,6 +24,7 @@ export class UserService {
   }
   async login(login: LoginUserDto): Promise<{ access_token: string }> {
     try {
+      console.log('entro');
       const { name, passsword } = login;
       const user = await this.userModel.findOne({ name });
       if (user) {
@@ -40,6 +41,7 @@ export class UserService {
       throw new NotFoundException('User not found');
       // eslint-disable-next-line @typescript-eslint/no-unused-vars
     } catch (error) {
+      console.log(error);
       //returna un 404
       throw new NotFoundException('User not found');
     }

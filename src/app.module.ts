@@ -27,10 +27,14 @@ import { OrderModule } from './order/order.module';
     JwtModule.registerAsync({
       imports: [ConfigModule],
       inject: [ConfigService],
-      useFactory: (configService: ConfigService) => ({
-        secret: configService.get<string>('SECRET'),
-        signOptions: { expiresIn: '60m' },
-      }),
+      useFactory: (configService: ConfigService) => {
+        console.log('secre:', configService.get<string>('SECRET'));
+        return {
+          secret: configService.get<string>('SECRET'),
+          signOptions: { expiresIn: '60m' },
+        };
+      },
+      global: true,
     }),
     UserModule,
     ProductModule,
@@ -38,6 +42,7 @@ import { OrderModule } from './order/order.module';
   ],
   controllers: [],
   providers: [],
+  exports: [],
 })
 export class AppModule implements NestModule {
   configure(consumer: MiddlewareConsumer) {
