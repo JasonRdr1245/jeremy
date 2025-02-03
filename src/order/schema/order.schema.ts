@@ -8,11 +8,6 @@ export class OrderDetail {
   _id?: mongoose.Types.ObjectId;
 
   @ApiProperty({
-    type: String,
-    description: 'The code of the order detail',
-    example: 'OD123',
-  })
-  @ApiProperty({
     type: Number,
     description: 'The quantity of the item',
     example: 2,
@@ -47,16 +42,6 @@ export const OrderDetailSchema = SchemaFactory.createForClass(OrderDetail);
 @Schema()
 export class Order {
   _id?: mongoose.Types.ObjectId;
-
-  @ApiProperty({
-    type: String,
-    description: 'The code of the order',
-    example: 'ORD123',
-  })
-  @IsNotEmpty()
-  @Prop({ required: true, type: String })
-  @IsString()
-  code: string;
 
   @ApiProperty({
     type: Number,
