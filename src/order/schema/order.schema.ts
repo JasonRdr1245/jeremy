@@ -6,6 +6,17 @@ import mongoose from 'mongoose';
 @Schema()
 export class OrderDetail {
   _id?: mongoose.Types.ObjectId;
+  //name
+
+  @ApiProperty({
+    type: String,
+    description: 'The name of the item',
+    example: 'Pizza Margherita',
+  })
+  @IsNotEmpty()
+  @IsString()
+  @Prop({ required: true, type: String })
+  name: string;
 
   @ApiProperty({
     type: Number,
