@@ -1,4 +1,8 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import {
+  Injectable,
+  InternalServerErrorException,
+  NotFoundException,
+} from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { Order } from './schema/order.schema';
@@ -9,8 +13,13 @@ export class OrderService {
   constructor(@InjectModel(Order.name) private orderModel: Model<Order>) {}
 
   async create(createOrderDto: CreateOrderDto): Promise<Order> {
-    const createdOrder = new this.orderModel(createOrderDto);
-    return createdOrder.save();
+    try {
+      const createdOrder = new this.orderModel(createOrderDto);
+      return createdOrder.save();
+    } catch (error) {
+      console.error(error);
+      throw new InternalServerErrorException(error);
+    }
   }
 
   async findAll(): Promise<Order[]> {
