@@ -44,7 +44,6 @@ export class OrderDetail {
     example: 'Extra cheese',
     required: false,
   })
-  @IsString()
   @Prop({ required: false, type: String })
   otherDetails?: string;
 }
